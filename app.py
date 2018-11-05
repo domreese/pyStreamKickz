@@ -21,16 +21,12 @@ listener = kickz_listener.KickzListener()
     listener.on_status(tweet) """
 my_stream = tweepy.Stream(auth, listener) 
 
-def go():
+while not my_stream.running:
     try:
-        print("[STREAM] Started steam")
+        print("[STREAM] Stream started!")
         my_stream.filter(follow=config.USER_IDS, _async=True)
     except Exception as ex:
         print ("[STREAM] Stream stopped! Reconnecting to twitter stream")
-        print(ex)
-        go()
-
-go()    
-    
+        print(ex)    
     
 
