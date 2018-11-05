@@ -3,21 +3,23 @@ import config
 import kickz_listener
 import signal
 
-""" def signal_handler(sig,frame):
+def signal_handler(sig,frame):
     print("Exiting!")
     exit()
-    my_stream.running = False """
+    my_stream.running = False
 
 # Initial setup
 auth = tweepy.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
 auth.set_access_token(config.ACCESS_KEY, config.ACCESS_SECRET)
 api = tweepy.API(auth)
 
-# signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
-# recent_tweets = api.user_timeline(config.USER_ID,count=4,tweet_mode="extended")
+# recent_tweets = api.user_timeline(config.USER_ID,count=4)
 listener = kickz_listener.KickzListener()
-my_stream = tweepy.Stream(auth, listener)
+""" for tweet in recent_tweets:
+    listener.on_status(tweet) """
+my_stream = tweepy.Stream(auth, listener) 
 
 def go():
     try:
