@@ -1,0 +1,17 @@
+
+CONSUMER_KEY = "uddHnmS0eQtmwNQQ5dhvdgmqT"
+CONSUMER_SECRET = "itrK3GE3w6TAdcStwYtvNvvOiSkMENBwmuNhX3Y7vcYcIoOdB8"
+ACCESS_KEY = "526658042-KVpo9ndy6RDJE2aVyxMpbQh6LUxp8DUbnOrfnNaM"
+ACCESS_SECRET = "lErrlugdOhmlbbDlHiJGMaF008IBlPuDEEmR6b4YDy2jW"
+
+USER_IDS = ['787695701253693440']
+
+USER_ID = 787695701253693440
+
+SLACK_URL = r'https://hooks.slack.com/services/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'
+
+INDEX_OF_PRODUCT_LINK = 0
+
+NO_PRODUCT_LINK_FOUND = "NO LINK FOUND"
+
+LINK_REGEX = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
