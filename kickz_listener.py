@@ -32,20 +32,30 @@ class KickzListener(tweepy.StreamListener):
 
             product_link = next((url for index, url in enumerate(urls) if index == config.INDEX_OF_PRODUCT_LINK), config.NO_PRODUCT_LINK_FOUND)
 
-            if product_link != config.NO_PRODUCT_LINK_FOUND and requests.get(product_link).status_code != 404:
-                if 'media' in tweet.entities:
-                    image_link = tweet.entities['media'][0]['media_url']
-                    self.notify_slack(product_link, image_link, product_desc)
+            if product_link != config.NO_PRODUCT_LINK_FOUND:       
+                site = requests.get(product_link)
+                real_link = site.url
+                if site.status_code != 404:      
+                    if 'media' in tweet.entities:
+                        image_link = tweet.entities['media'][0]['media_url']
+                        self.notify_slack(real_link, image_link, product_desc)
+                    else:
+                        self.notify_slack(real_link, desc=product_desc)
+
+                    print(f"Product link: {real_link}\n{'*' * len(tweet.text)}")
                 else:
-                    self.notify_slack(product_link, desc=product_desc)
-                
-                print(f"{tweet.text}\nProduct link: {product_link}\n{'*' * len(tweet.text)}")
+                    print(f"Product link: [{real_link} receieved 404]\n{'*' * len(tweet.text)}")
         
         except Exception as e:
             print(f"Something went wrong:\n{e}")
         
         
         return True
+    
+    def on_exception(self, idk):
+        print("In on_exception")
+        return True
+
 
     
     def on_error(self, status_code):
